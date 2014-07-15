@@ -4,7 +4,10 @@ import android.test.AndroidTestCase;
 
 public class JavaTest extends AndroidTestCase{
 	
-   private void sysout() { 
+   private void sysout() {     
+	   
+	    
+	    
 }
 /*	@Override
 	protected void setUp() throws Exception {
