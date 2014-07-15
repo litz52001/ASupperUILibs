@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+    <!--
+		设置字体阴影
+		android:shadowColor 阴影颜色  （前两位为透明度）
+		android:shadowDx 阴影的水平偏移量  向右为正
+		android:shadowDy 阴影的垂直偏移量  向下为正
+		android:shadowRadius 阴影的范围    阴影的半径 为0时没有效果。
+		
+		@anim/push_right_in
+		@anim/push_left_out
+    -->
+    
+    <style name="leftInRightOutAnim" parent="android:Animation" mce_bogus="1" >
+		<item name="android:windowEnterAnimation">@anim/push_left_in</item>
+		<item name="android:windowExitAnimation">@anim/push_right_out</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:windowNoTitle">true</item>
+	</style>
+    
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <style name="textstyle">
+        <item name="android:shadowColor">@color/darkblue</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+    </style>
+
+    <style name="AndroidPosDialog" parent="@android:style/Theme.Dialog">
+
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 自己想要的背景 -->
+        <item name="android:windowBackground">@color/transparent</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden|stateUnspecified|adjustPan</item>
+    </style>
+    
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden|stateUnspecified|adjustPan</item>
+    </style>
+
+    <style name="CustomProgressDialog" parent="@style/CustomDialog">
+        <item name="android:windowBackground">@drawable/progressdialog_bg</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="FullScreenDialog">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
+    <!-- 定义主题         <item name="android:textStyle">bold|italic</item> -->
+    <style name="MyTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:typeface">monospace</item>
+        <item name="TextV">@style/TextV</item>
+        <item name="EditT">@style/EditT</item>
+        <item name="LayoutWH">@style/LayoutWH</item>
+        <item name="Btn">@style/Btn</item>
+        <item name="ListV">@style/ListV</item>
+      	<item name="android:windowSoftInputMode">stateAlwaysHidden|stateUnspecified</item>
+    </style>
+
+    <!-- 背景 -->
+    <!--
+         <style name="Color">
+        <item name="android:background">@color/basebg</item>
+    </style>
+    <style name="Color.title">
+        <item name="android:background">@color/title</item>
+    </style>
+    <style name="Color.storInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+    <style name="Color.graybg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+
+    -->
+
+
+    <!-- activity -->
+    <style name="Activity">
+        <item name="android:configChanges">keyboardHidden|orientation</item>
+        <item name="android:screenOrientation">landscape</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden|adjustResize</item>
+    </style>
+    
+  <style name="RodioButton">
+	<item name="android:textColor">#ffffffff</item>
+	<item name="android:ellipsize">marquee</item>
+	<item name="android:gravity">center_horizontal</item> 
+	<item name="android:layout_width">fill_parent</item>
+	<item name="android:layout_height">wrap_content</item>
+	<item name="android:button">@null</item> 
+	<item name="android:singleLine">true</item>
+	<item name="android:drawablePadding">@dimen/five</item>
+	<item name="android:layout_weight">1.0</item>
+  </style>
+    
+
+    <!-- textview -->
+    <style name="TextV" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp_normal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextV.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="TextV.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+    
+    <style name="TextV.TextS_Small.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+
+    <style name="TextV.TextS_large.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="TextV.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+    <style name="TextV.TextS_huge.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="TextV.FW">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextV.FW.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="TextV.FW.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="TextV.FW.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+    
+    <style name="TextV.FW.TextS_Small.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FW.TextS_Small.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="TextV.FW.TextS_Small.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="TextV.FW.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+    
+    <style name="TextV.FW.TextS_large.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FW.TextS_large.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="TextV.FW.TextS_large.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FW.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+    
+    <style name="TextV.FW.TextS_huge.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FW.TextS_huge.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="TextV.FW.TextS_huge.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FF">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
+    <style name="TextV.FF.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FF.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="TextV.FF.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FF.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+    
+    <style name="TextV.FF.TextS_Small.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FF.TextS_Small.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="TextV.FF.TextS_Small.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="TextV.FF.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+    
+    <style name="TextV.FF.TextS_large.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FF.TextS_large.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="TextV.FF.TextS_large.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FF.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+    
+    <style name="TextV.FF.TextS_huge.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="TextV.FF.TextS_huge.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="TextV.FF.TextS_huge.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <!-- edittext <item name="android:hint">@string/preparemoneyhint</item>-->
+    <style name="EditT" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/sp_normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:imeOptions">flagNoExtractUi</item>
+        <item name="android:paddingLeft">@dimen/ten</item>
+        <item name="android:paddingRight">@dimen/ten</item>
+        <item name="android:background">@drawable/login_edit</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="EditT.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+
+    <style name="EditT.TextS_Small.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+
+    <style name="EditT.TextS_large.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+    <style name="EditT.TextS_huge.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.Single">
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="EditT.Single.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.Single.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+
+    <style name="EditT.Single.TextS_Small.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.Single.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+
+    <style name="EditT.Single.TextS_large.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.Single.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+    <style name="EditT.Single.TextS_huge.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/edit_height</item>
+    </style>
+
+        <style name="EditT.FZ.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="EditT.FZ.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_Small.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_Small.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_large.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_large.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_huge.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.TextS_huge.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditT.FZ.Single">
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="EditT.FZ.Single.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.Single.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_Small.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_Small.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_large.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_large.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_huge.Num">
+        <item name="android:inputType">phone</item>
+    </style>
+
+    <style name="EditT.FZ.Single.TextS_huge.Num.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- Button -->
+    <style name="Btn" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">@dimen/btn_width</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:textSize">@dimen/sp_normal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_confirm</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="Btn.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+    
+    <style name="Btn.TextS_Small.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="Btn.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+
+    <style name="Btn.TextS_large.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+    <style name="Btn.TextS_huge.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.FW">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="Btn.FW.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="Btn.FW.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="Btn.FW.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_Small">
+        <item name="android:textSize">@dimen/sp_small</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_Small.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="Btn.FW.TextS_Small.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="Btn.FW.TextS_Small.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_large.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_large.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="Btn.FW.TextS_large.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+    <style name="Btn.FW.TextS_huge.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_huge.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="Btn.FW.TextS_huge.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+
+    <style name="Btn.FF">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
+    <style name="Btn.FF.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    <style name="Btn.FF.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="Btn.FF.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>    
+    
+    <style name="Btn.FF.TextS_huge">
+        <item name="android:textSize">@dimen/sp_huge</item>
+    </style>
+
+     <style name="Btn.FF.TextS_huge.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="Btn.FF.TextS_huge.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+     
+    <style name="Btn.FF.TextS_large">
+        <item name="android:textSize">@dimen/sp_large</item>
+    </style>
+
+     <style name="Btn.FF.TextS_large.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="Btn.FF.TextS_large.Weight.Bold" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textScaleX">0.96</item>
+    </style>
+    
+    
+    <!-- ListView 
+    	<item name="android:paddingLeft">@dimen/two</item>
+        <item name="android:paddingRight">@dimen/two</item>
+        <item name="android:transcriptMode">alwaysScroll</item>
+    -->
+    <style name="ListV" parent="@android:style/Widget.ListView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:choiceMode">singleChoice</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:listSelector">#00000000</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:fastScrollEnabled">true</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:divider">#00000000</item>
+    </style>
+
+    <style name="ListV.menu">
+        <item name="android:divider">@drawable/listitem_divide</item>
+    </style>
+    
+    <style name="ListV.FF">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
+    <style name="ListV.FF.menu">
+        <item name="android:divider">@drawable/listitem_divide</item>
+    </style>
+    
+    <style name="ListV.FF.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+    
+    <style name="ListV.FF.Weight.menu">
+        <item name="android:divider">@drawable/listitem_divide</item>
+    </style>
+    
+    <!-- Gridview  -->
+    <style name="GridV" parent="@android:style/Widget.GridView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:listSelector">@null</item>
+        <item name="android:paddingLeft">@dimen/five</item>
+        <item name="android:paddingRight">@dimen/five</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:horizontalSpacing">@dimen/five</item>
+        <item name="android:verticalSpacing">@dimen/five</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="GridV.FF">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
+    <style name="GridV.FF.Pad">
+           <item name="android:padding">@dimen/two</item> 
+    </style>
+    
+    <style name="GridV.FW">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="GridV.FW.Pad">
+           <item name="android:padding">@dimen/two</item> 
+    </style>
+
+    <!-- layout width-height -->
+    <style name="LayoutWH">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:baselineAligned">false</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="LayoutWH.Ori_H">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LayoutWH.Ori_H.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.Ori_H.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.Ori_H.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.Ori_H.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.Ori_V">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="LayoutWH.Ori_V.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.Ori_V.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.Ori_V.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.Ori_V.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FF">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
+    <style name="LayoutWH.FF.Weight">
+         <item name="android:layout_weight">1</item>
+    </style>    
+    
+
+    <style name="LayoutWH.FF.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FF.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FF.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H">
+        <item name="android:orientation">horizontal</item>
+    </style>
+    
+    <style name="LayoutWH.FF.Ori_H.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad">
+        <item name="android:padding">@dimen/two</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.Weight.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.Weight.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.Weight.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_H.Pad.Weight.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad">
+        <item name="android:padding">@dimen/two</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.Weight.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.Weight.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.Weight.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FF.Ori_V.Pad.Weight.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FW">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="LayoutWH.FW.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Pad">
+        <item name="android:padding">@dimen/two</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Pad.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Pad.Weight.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Pad.Weight.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Pad.Weight.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_H.Pad.Weight.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V">
+        <item name="android:orientation">vertical</item>
+    </style>
+    
+    <style name="LayoutWH.FW.Ori_V.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>    
+
+    <style name="LayoutWH.FW.Ori_V.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad">
+        <item name="android:padding">@dimen/two</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.Weight.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.Weight.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.Weight.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.FW.Ori_V.Pad.Weight.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.WF">
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Pad">
+        <item name="android:padding">@dimen/two</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Pad.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Pad.Weight.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Pad.Weight.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Pad.Weight.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_H.Pad.Weight.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad">
+        <item name="android:orientation">@dimen/two</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.Weight">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.Weight.Bg">
+        <item name="android:background">@color/graybg</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.Weight.Title">
+        <item name="android:background">@color/title</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.Weight.StorInfo">
+        <item name="android:background">@color/storInfo</item>
+    </style>
+
+    <style name="LayoutWH.WF.Ori_V.Pad.Weight.BaseBg">
+        <item name="android:background">@color/basebg</item>
+    </style>
+
+    <style name="LinieH">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/silver</item>
+    </style>
+
+    <style name="LinieH.V">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    
+    
+
+</resources>

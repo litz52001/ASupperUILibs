@@ -1,0 +1,80 @@
+<resources>
+
+    <declare-styleable name="MyTheme">
+        <attr name="TextV" format="reference" />
+        <attr name="EditT" format="reference" />
+        <attr name="LayoutWH" format="reference" />
+        <attr name="Activity" format="reference" />
+        <attr name="Btn" format="reference" />
+        <attr name="ListV" format="reference" />
+    </declare-styleable>
+
+    <!--
+         Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels.    -->
+    
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="buttonBarStyle" format="reference" />
+        <attr name="buttonBarButtonStyle" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="Panel">
+
+        <!-- Defines panel animation duration in ms. -->
+        <attr name="animationDuration" format="integer" />
+        <!-- Defines panel position on the screen. -->
+        <attr name="position">
+
+            <!-- Panel placed at top of the screen. -->
+            <enum name="top" value="0" />
+            <!-- Panel placed at bottom of the screen. -->
+            <enum name="bottom" value="1" />
+            <!-- Panel placed at left of the screen. -->
+            <enum name="left" value="2" />
+            <!-- Panel placed at right of the screen. -->
+            <enum name="right" value="3" />
+        </attr>
+        <!-- Identifier for the child that represents the panel's handle. -->
+        <attr name="handle" format="reference" />
+        <!-- Identifier for the child that represents the panel's handle button. -->
+        <attr name="handlebtn" format="reference" />
+        <!-- Identifier for the child that represents the panel's content. -->
+        <attr name="content" format="reference" />
+        <!-- Defines if flying gesture forces linear interpolator in animation. -->
+        <attr name="linearFlying" format="boolean" />
+        <!-- Defines size relative to parent (must be in form: nn%p). -->
+        <attr name="weight" format="fraction" />
+        <!-- Defines opened handle (drawable/color). -->
+        <attr name="openedHandle" format="reference|color" />
+        <!-- Defines closed handle (drawable/color). -->
+        <attr name="closedHandle" format="reference|color" />
+    </declare-styleable>
+
+    	<declare-styleable name="FuncRidioButton">
+		<attr name="title" format="reference|string" />
+		<attr name="logo" format="reference|color" />
+		<attr name="desc" format="reference|string" />
+		<attr name="checked" format="boolean" />
+		<attr name="radio" format="reference"/>
+	</declare-styleable>
+	
+	<!-- Standard orientation constant. -->
+    <attr name="orientation">
+        <!-- Defines an horizontal widget. -->
+        <enum name="horizontal" value="0" />
+        <!-- Defines a vertical widget. -->
+        <enum name="vertical" value="1" />
+    </attr>
+	
+	<declare-styleable name="FuncRidioGroup">
+	    <!-- The id of the child radio button that should be checked by default
+             within this radio group. -->
+        <attr name="checkedButton" format="integer" />
+        <!-- Should the radio group be a column or a row?  Use "horizontal"
+             for a row, "vertical" for a column.  The default is
+             vertical. -->
+        <attr name="orientation" />
+	</declare-styleable>
+    
+</resources>

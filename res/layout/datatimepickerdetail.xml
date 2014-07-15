@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LayoutWH.FW.Ori_V"
+    android:background="@drawable/datetimepicker_border_bg"
+    android:padding="@dimen/five" >
+
+    <TextView
+        android:id="@+id/setdatepicker"
+        android:layout_marginTop="@dimen/ten"
+        style="@style/TextV.FW"
+        android:textSize="18sp"
+        android:text="请选择日期"
+         />
+
+    <View
+        style="@style/LinieH"
+        android:background="@color/datepicker"
+        android:layout_marginBottom="@dimen/three"
+        android:layout_marginTop="@dimen/three" />
+
+    <LinearLayout
+        android:id="@+id/timePicker1"
+        style="@style/LayoutWH.FW.Ori_H"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp" >
+
+        <com.litz.Widget.DataWheel.WheelView
+            android:id="@+id/year"
+            style="@style/LayoutWH.FW"
+            android:layout_weight="5" />
+
+        <com.litz.Widget.DataWheel.WheelView
+            android:id="@+id/month"
+            style="@style/LayoutWH.FW"
+            android:layout_weight="6" />
+
+        <com.litz.Widget.DataWheel.WheelView
+            android:id="@+id/day"
+            style="@style/LayoutWH.FW"
+            android:layout_weight="6" />
+
+        <com.litz.Widget.DataWheel.WheelView
+            android:id="@+id/hour"
+            style="@style/LayoutWH.FW"
+            android:layout_weight="6"
+            android:visibility="gone" />
+
+        <com.litz.Widget.DataWheel.WheelView
+            android:id="@+id/mins"
+            style="@style/LayoutWH.FW"
+            android:layout_weight="6"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LayoutWH"
+        android:padding="10dp"
+        android:layout_gravity="center" >
+
+        <Button
+            android:id="@+id/btn_datetime_sure"
+            style="@style/Btn"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/selectbtn_graybg"
+            android:text="确定" >
+        </Button>
+
+        <Button
+            android:id="@+id/btn_datetime_cancel"
+            style="@style/Btn"
+            android:background="@drawable/selectbtn_graybg"
+            android:text="取消" >
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>

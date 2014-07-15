@@ -1,0 +1,93 @@
+# To enable ProGuard in your project, edit project.properties
+# to define the proguard.config property as described in that file.
+#
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+-libraryjars /libs/BlueToothTool.jar
+-keep class com.example.bluedemo.** {*;}
+-dontwarn com.example.bluedemo.**
+
+-libraryjars /libs/qdone-http-140220.jar
+-keep class com.whty.qd.net.** {*;}
+-dontwarn com.whty.qd.net.**
+
+-libraryjars /libs/core.jar
+-keep class com.google.zxing.** {*;}
+-dontwarn com.google.zxing.**
+
+-libraryjars /libs/android-app-http.jar
+-keep class com.allthelucky.http.** {*;}
+-dontwarn com.allthelucky.http.**
+-keep class com.loopj.android.http.** {*;}
+-dontwarn com.loopj.android.http.**
+
+-libraryjars /libs/aishuaver_3.03.jar
+-keep class com.itron.** {*;}
+-dontwarn com.itron.**
+
+-libraryjars /libs/universal-image-loader-1.8.4-with-sources.jar
+-keep class com.nostra13.universalimageloader.** {*;}
+-dontwarn com.nostra13.universalimageloader.**
+
+-libraryjars /libs/locSDK_3.1.jar
+-keep class com.baidu.location.** {*;}
+-dontwarn com.baidu.location.**
+
+-libraryjars /libs/sdpmanager.jar
+-keep class com.whty.qd.upay.business.** {*;}
+-dontwarn com.whty.qd.upay.business.**
+-keep class com.whty.qdone.** {*;}
+-dontwarn com.whty.qdone.**
+
+-libraryjars /libs/android-support-v4.jar
+-keep class android.support.v4.** {*;}
+-dontwarn android.support.v4.**
+
+-libraryjars /libs/android-app-http.jar
+-keep class com.allthelucky.http.** {*;}
+-dontwarn com.allthelucky.http.**
+
+-keep class com.whty.pSamCardLib.** {*;}
+-dontwarn com.whty.pSamCardLib.**
+
+-keep class cn.com.whty.DovilaSDKLib.** {*;}
+-dontwarn cn.com.whty.DovilaSDKLib.**
+
+-libraryjars /libs/httpmime-4.1.3.jar
+-keep class org.apache.http.entity.mime.** {*;}
+-dontwarn org.apache.http.entity.mime.**
+
+
+-keep class org.apache.http.entity.mime.** {*;}
+-dontwarn org.apache.http.entity.mime.**
+
+-keep class com.example.testcamera.** {*;}
+-dontwarn com.example.testcamera.**
+
+
+-keep class com.whty.qd.encode.** { *; }
+-dontwarn com.whty.qd.encode.**
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
