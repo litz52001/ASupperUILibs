@@ -1,141 +1,607 @@
 package com.litz.Tools;
 
+
+
 public class MoneyUtil {
 
-	public static String[] chineseDigits = new String[]{"零", "壹", "贰", "叁",
-			"肆", "伍", "陆", "柒", "捌", "玖"};
+    private static String[] CH = { "", "", "拾", "佰", "仟", "万", "", "", "", "亿", "", "", "", "兆" };
+    
+    private static String[] CHS_NUMBER={"零","壹","贰","叁","肆","伍","陆","柒","捌","玖"};
+    
+//    public static void main(String[] args)
+//    {
+////        String m = "1234565457.02";
+//    		Double aDouble = 10.01;
+//        	System.out.println(MoneyUtil.amountToChinese(aDouble));
+//    }
+    
+    public static String numToChinese(Double amount) {
+    	if(amount == 0)
+    		 return "零元";
+    	else
+    		return amountToChinese(Double.toString(amount));
+    }
+    
+    /**
+     * 传入数字金额字符串，返回数字金额对应的中文大字与读法
+     * 
+     * @param money
+     *            金额字符串
+     * @return 金额中文大写
+     */
+    public static String amountToChinese(String money)
+    {
+        String chs = "";
 
-	/**
-	 * 把金额转换为汉字表示的数量，小数点后四舍五入保留两位
-	 * 
-	 * @param amount
-	 * @return
-	 */
-	public static String amountToChinese(double amount) {
+        String tmp_int = money.substring(0, money.indexOf("."));
+        String tmp_down = money.substring(money.indexOf(".") + 1, money.length());
 
-		if (amount > 99999999999999.99 || amount < -99999999999999.99)
-			throw new IllegalArgumentException(
-					"参数值超出允许范围 (-99999999999999.99 ～ 99999999999999.99)！");
+        char[] tmp_int_char = tmp_int.toCharArray();
+        String[] tmp_chs = new String[tmp_int_char.length];
 
-		boolean negative = false;
-		if (amount < 0) {
-			negative = true;
-			amount = amount * (-1);
-		}
+        int tab = 0;
+        for (int i = 0; i < tmp_int_char.length; i++)
+        {
 
-		long temp = Math.round(amount * 100);
-		int numFen = (int) (temp % 10); // 分
-		temp = temp / 10;
-		int numJiao = (int) (temp % 10); // 角
-		temp = temp / 10;
-		// temp 目前是金额的整数部分
+            tab = tmp_int_char.length - i - 1;
 
-		int[] parts = new int[20]; // 其中的元素是把原来金额整数部分分割为值在 0~9999 之间的数的各个部分
-		int numParts = 0; // 记录把原来金额整数部分分割为了几个部分（每部分都在 0~9999 之间）
-		for (int i = 0;; i++) {
-			if (temp == 0)
-				break;
-			int part = (int) (temp % 10000);
-			parts[i] = part;
-			numParts++;
-			temp = temp / 10000;
-		}
+            if (tmp_int_char.length <= 5)
+            {
+                tmp_chs[tab] = CHS_NUMBER[(int) Float.parseFloat(tmp_int_char[i] + ".0")];
 
-		boolean beforeWanIsZero = true; // 标志“万”下面一级是不是 0
+                if (!tmp_chs[tab].equals("零"))
+                {
 
-		String chineseStr = "";
-		for (int i = 0; i < numParts; i++) {
+                    // tmp_int_char.length - i 为数字所在的位数
+                    chs = chs + tmp_chs[tab] + CH[tmp_int_char.length - i];
+                } else
+                {// 当数字中有零时就在后加上零，如果超过１个以上的零也只加一个零
+                    if (!chs.endsWith("零") && tab != 0)
+                    {
+                        chs = chs + tmp_chs[tab];
 
-			String partChinese = partTranslate(parts[i]);
-			if (i % 2 == 0) {
-				if ("".equals(partChinese))
-					beforeWanIsZero = true;
-				else
-					beforeWanIsZero = false;
-			}
+                    } else if (chs.endsWith("零") && tab == 0)
+                    {
+                        chs = chs.substring(0, chs.length() - 1);
+                    }
 
-			if (i != 0) {
-				if (i % 2 == 0)
-					chineseStr = "亿" + chineseStr;
-				else {
-					if ("".equals(partChinese) && !beforeWanIsZero) // 如果“万”对应的
-																	// part 为
-																	// 0，而“万”下面一级不为
-																	// 0，则不加“万”，而加“零”
-						chineseStr = "零" + chineseStr;
-					else {
-						if (parts[i - 1] < 1000 && parts[i - 1] > 0) // 如果"万"的部分不为
-																		// 0,
-																		// 而"万"前面的部分小于
-																		// 1000
-																		// 大于 0，
-																		// 则万后面应该跟“零”
-							chineseStr = "零" + chineseStr;
-						chineseStr = "万" + chineseStr;
-					}
-				}
-			}
-			chineseStr = partChinese + chineseStr;
-		}
+                }
+            }
 
-		if ("".equals(chineseStr)) // 整数部分为 0, 则表达为"零元"
-			chineseStr = chineseDigits[0];
-		else if (negative) // 整数部分不为 0, 并且原金额为负数
-			chineseStr = "负" + chineseStr;
+            // 　如果数字的位数大于５和小于９时
+            if (tmp_int_char.length > 5 && tmp_int_char.length < 9)
+            {
+                tmp_chs[tab] = CHS_NUMBER[(int) Float.parseFloat(tmp_int_char[i] + ".0")];
 
-		chineseStr = chineseStr + "元";
+                // 如：123,1234分成两部分
+                // 第１部分123：万以上亿以下
+                if (tab >= 4)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 3];
 
-		if (numFen == 0 && numJiao == 0) {
-			chineseStr = chineseStr + "整";
-		} else if (numFen == 0) { // 0 分，角数不为 0
-			chineseStr = chineseStr + chineseDigits[numJiao] + "角";
-		} else { // “分”数不为 0
-			if (numJiao == 0)
-				chineseStr = chineseStr + "零" + chineseDigits[numFen] + "分";
-			else
-				chineseStr = chineseStr + chineseDigits[numJiao] + "角"
-						+ chineseDigits[numFen] + "分";
-		}
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 4)
+                        {
+                            chs = chs + "万";
+                        }
 
-		return chineseStr;
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
 
-	}
+                        }
 
-	/**
-	 * 把一个 0~9999 之间的整数转换为汉字的字符串，如果是 0 则返回 ""
-	 * 
-	 * @param amountPart
-	 * @return
-	 */
-	private static String partTranslate(int amountPart) {
+                        // 当第１部分算完时
 
-		if (amountPart < 0 || amountPart > 10000) {
-			throw new IllegalArgumentException("参数必须是大于等于 0，小于 10000 的整数！");
-		}
+                        if (tab == 4)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+                                chs = chs + "万";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                chs = chs + "万";
+                            }
+                        }
+                    }
+                }
 
-		String[] units = new String[]{"", "拾", "佰", "仟"};
+                // 如：123,1234分成两部分
+                // 第１部分1234：万以下
+                if (tab < 4)
+                {
 
-		int temp = amountPart;
+                    if (!tmp_chs[tab].equals("零"))
+                    {
 
-		String amountStr = new Integer(amountPart).toString();
-		int amountStrLength = amountStr.length();
-		boolean lastIsZero = true; // 在从低位往高位循环时，记录上一位数字是不是 0
-		String chineseStr = "";
+                        // tmp_int_char.length - i 为数字所在的位数
+                        chs = chs + tmp_chs[tab] + CH[tmp_int_char.length - i];
+                    } else
+                    {// 当数字中有零时就在后加上零，如果超过１个以上的零也只加一个零
+                        if (!chs.endsWith("零") && tab != 0)
+                        {
+                            chs = chs + tmp_chs[tab];
 
-		for (int i = 0; i < amountStrLength; i++) {
-			if (temp == 0) // 高位已无数据
-				break;
-			int digit = temp % 10;
-			if (digit == 0) { // 取到的数字为 0
-				if (!lastIsZero) // 前一个数字不是 0，则在当前汉字串前加“零”字;
-					chineseStr = "零" + chineseStr;
-				lastIsZero = true;
-			} else { // 取到的数字不是 0
-				chineseStr = chineseDigits[digit] + units[i] + chineseStr;
-				lastIsZero = false;
-			}
-			temp = temp / 10;
-		}
-		return chineseStr;
-	}
+                        }
+
+                        if (chs.endsWith("零") && tab == 0)
+                        {
+                            chs = chs.substring(0, chs.length() - 1);
+                        }
+                    }
+                }
+            }
+
+            // 　如果数字的位数大于５和小于９时
+            if (tmp_int_char.length >= 9 && tmp_int_char.length <= 12)
+            {
+                tmp_chs[tab] = CHS_NUMBER[(int) Float.parseFloat(tmp_int_char[i] + ".0")];
+
+                if (tab >= 8 && tab < 12)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 7];
+
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 8)
+                        {
+                            chs = chs + "亿";
+                        }
+
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        // 当第１部分算完时
+
+                        if (tab == 8)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+                                chs = chs + "亿";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                chs = chs + "亿";
+                            }
+                        }
+                    }
+                }
+                // 如：123,1234分成两部分
+                // 第１部分123：万以上亿以下
+                if (tab >= 4 && tab < 8)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 3];
+
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 4)
+                        {
+                            chs = chs + "万";
+                        }
+
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        // 当第１部分算完时
+
+                        if (tab == 4)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+
+                                if (!chs.endsWith("亿"))
+                                    chs = chs + "万";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                if (!chs.endsWith("亿"))
+                                    chs = chs + "万";
+                            }
+                        }
+                    }
+                }
+
+                // 如：123,1234分成两部分
+                // 第１部分1234：万以下
+                if (tab < 4)
+                {
+
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+
+                        // tmp_int_char.length - i 为数字所在的位数
+                        chs = chs + tmp_chs[tab] + CH[tmp_int_char.length - i];
+                    } else
+                    {// 当数字中有零时就在后加上零，如果超过１个以上的零也只加一个零
+                        if (!chs.endsWith("零") && tab != 0)
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        if (chs.endsWith("零") && tab == 0)
+                        {
+                            chs = chs.substring(0, chs.length() - 1);
+                        }
+                    }
+                }
+            }
+
+            // 　如果数字的位数大于12和小于16时
+            if (tmp_int_char.length > 12 && tmp_int_char.length <= 16)
+            {
+                tmp_chs[tab] = CHS_NUMBER[(int) Float.parseFloat(tmp_int_char[i] + ".0")];
+
+                if (tab >= 12 && tab < 16)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 11];
+
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 12)
+                        {
+                            chs = chs + "兆";
+                        }
+
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        // 当第１部分算完时
+
+                        if (tab == 12)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+                                chs = chs + "兆";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                chs = chs + "兆";
+                            }
+                        }
+                    }
+                }
+
+                if (tab >= 8 && tab < 12)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 7];
+
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 8)
+                        {
+                            chs = chs + "亿";
+                        }
+
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        // 当第１部分算完时
+
+                        if (tab == 8)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+                                if (!chs.endsWith("兆"))
+                                    chs = chs + "亿";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                if (!chs.endsWith("兆"))
+                                    chs = chs + "亿";
+                            }
+                        }
+                    }
+                }
+                // 如：123,1234分成两部分
+                // 第１部分123：万以上亿以下
+                if (tab >= 4 && tab < 8)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 3];
+
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 4)
+                        {
+                            chs = chs + "万";
+                        }
+
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        // 当第１部分算完时
+
+                        if (tab == 4)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+
+                                if (!chs.endsWith("亿"))
+                                    if (!chs.endsWith("兆"))
+                                        if (!chs.endsWith("兆"))
+                                            chs = chs + "万";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                if (!chs.endsWith("亿"))
+                                    if (!chs.endsWith("兆"))
+                                        chs = chs + "万";
+                            }
+                        }
+                    }
+                }
+
+                // 如：123,1234分成两部分
+                // 第１部分1234：万以下
+                if (tab < 4)
+                {
+
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+
+                        // tmp_int_char.length - i 为数字所在的位数
+                        chs = chs + tmp_chs[tab] + CH[tmp_int_char.length - i];
+                    } else
+                    {// 当数字中有零时就在后加上零，如果超过１个以上的零也只加一个零
+                        if (!chs.endsWith("零") && tab != 0)
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        if (chs.endsWith("零") && tab == 0)
+                        {
+                            chs = chs.substring(0, chs.length() - 1);
+                        }
+                    }
+                }
+            }
+
+            // 　如果数字的位数大于16
+            if (tmp_int_char.length > 16)
+            {
+                tmp_chs[tab] = CHS_NUMBER[(int) Float.parseFloat(tmp_int_char[i] + ".0")];
+
+                if (tab >= 12)
+                {
+                    chs = chs + tmp_chs[tab];
+
+                    // 　当第１部分算完时在加上"万"
+                    if (tab == 12)
+                    {
+                        chs = chs + "兆";
+                    }
+
+                }
+
+                if (tab >= 8 && tab < 12)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 7];
+
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 8)
+                        {
+                            chs = chs + "亿";
+                        }
+
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        // 当第１部分算完时
+
+                        if (tab == 8)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+                                if (!chs.endsWith("兆"))
+                                    chs = chs + "亿";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                if (!chs.endsWith("兆"))
+                                    chs = chs + "亿";
+                            }
+                        }
+                    }
+                }
+                // 如：123,1234分成两部分
+                // 第１部分123：万以上亿以下
+                if (tab >= 4 && tab < 8)
+                {
+                    // 当前数字不是大小零时
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+                        chs = chs + tmp_chs[tab] + CH[tab - 3];
+
+                        // 　当第１部分算完时在加上"万"
+                        if (tab == 4)
+                        {
+                            chs = chs + "万";
+                        }
+
+                    } else
+                    {
+                        // 当前数字为大小"零"时
+                        // 判断前一次形成在字符串结尾有没有零
+                        // 　如果没有零就加上零
+                        if (!chs.endsWith("零"))
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        // 当第１部分算完时
+
+                        if (tab == 4)
+                        {
+                            // 　先判断字符串有没有零
+                            // 　如果有零时就把零去掉再加上"万"
+                            if (chs.endsWith("零"))
+                            {
+                                chs = chs.substring(0, chs.length() - 1);
+
+                                if (!chs.endsWith("兆"))
+
+                                    if (!chs.endsWith("亿"))
+
+                                        chs = chs + "万";
+                            } else
+                            {
+                                // 　如果没有零就直接加上"万"
+                                if (!chs.endsWith("兆"))
+
+                                    if (!chs.endsWith("亿"))
+                                        chs = chs + "万";
+                            }
+                        }
+                    }
+                }
+
+                // 如：123,1234分成两部分
+                // 第１部分1234：万以下
+                if (tab < 4)
+                {
+
+                    if (!tmp_chs[tab].equals("零"))
+                    {
+
+                        // tmp_int_char.length - i 为数字所在的位数
+                        chs = chs + tmp_chs[tab] + CH[tmp_int_char.length - i];
+                    } else
+                    {// 当数字中有零时就在后加上零，如果超过１个以上的零也只加一个零
+                        if (!chs.endsWith("零") && tab != 0)
+                        {
+                            chs = chs + tmp_chs[tab];
+
+                        }
+
+                        if (chs.endsWith("零") && tab == 0)
+                        {
+                            chs = chs.substring(0, chs.length() - 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (tmp_down != null) 
+        {
+            char[] tmp = tmp_down.toCharArray();
+
+            if (tmp.length == 1)
+            {
+                if (tmp[0] != '0')
+                    chs = chs + "元" + CHS_NUMBER[(int) Float.parseFloat(tmp[0] + ".0")] + "角整";
+                else
+                    chs = chs + "元整";
+            } else
+            {
+                if (tmp[1] != '0' && tmp[0] != '0')
+                {
+                    chs = chs + "元" + CHS_NUMBER[(int) Float.parseFloat(tmp[0] + ".0")] + "角"
+                            + CHS_NUMBER[(int) Float.parseFloat(tmp[1] + ".0")] + "分";
+                } else if (tmp[1] != '0' && tmp[0] == '0')
+                {
+                    chs = chs + "元零角" + CHS_NUMBER[(int) Float.parseFloat(tmp[1] + ".0")] + "分";
+                }
+            }
+
+        } else {
+            chs = chs + "元整";
+        }
+
+        return chs;
+    }
+    
 }
