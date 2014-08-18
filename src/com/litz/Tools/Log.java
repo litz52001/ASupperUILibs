@@ -7,6 +7,10 @@ public final class Log {
 	 */
 	public static boolean mDebug = false;
 
+	public static String makeTag(Class cls){
+		return "Push_"+cls.getSimpleName();
+	}
+	
 	public static void init(final boolean debug) {
 		mDebug = debug;
 	}
