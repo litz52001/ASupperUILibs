@@ -25,28 +25,28 @@
         android:paddingRight="8dp"
         android:paddingTop="8dp" >
 
-        <com.litz.Widget.DataWheel.WheelView
+        <com.alibs.Widget.DataWheel.WheelView
             android:id="@+id/year"
             style="@style/LayoutWH.FW"
             android:layout_weight="5" />
 
-        <com.litz.Widget.DataWheel.WheelView
+        <com.alibs.Widget.DataWheel.WheelView
             android:id="@+id/month"
             style="@style/LayoutWH.FW"
             android:layout_weight="6" />
 
-        <com.litz.Widget.DataWheel.WheelView
+        <com.alibs.Widget.DataWheel.WheelView
             android:id="@+id/day"
             style="@style/LayoutWH.FW"
             android:layout_weight="6" />
 
-        <com.litz.Widget.DataWheel.WheelView
+        <com.alibs.Widget.DataWheel.WheelView
             android:id="@+id/hour"
             style="@style/LayoutWH.FW"
             android:layout_weight="6"
             android:visibility="gone" />
 
-        <com.litz.Widget.DataWheel.WheelView
+        <com.alibs.Widget.DataWheel.WheelView
             android:id="@+id/mins"
             style="@style/LayoutWH.FW"
             android:layout_weight="6"

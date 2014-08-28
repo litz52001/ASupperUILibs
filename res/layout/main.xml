@@ -11,7 +11,7 @@
         android:orientation="vertical" 
         >
 
-        <com.litz.Widget.RotateImageView
+        <com.alibs.Widget.RotateImageView
             android:id="@+id/update_progress"
             android:layout_width="45.0dip"
             android:layout_height="45.0dip"
@@ -20,7 +20,7 @@
             android:src="@drawable/refresh_btn" />
     </LinearLayout>
 
-    <com.litz.Widget.DataWheel.DataTimePicker
+    <com.alibs.Widget.DataWheel.DataTimePicker
         android:id="@+id/dataWheel"
         style="@style/LayoutWH.FW"
         />
@@ -33,10 +33,29 @@
         
         />
 
-    <com.litz.Widget.CustomerSpinner
+    <com.alibs.Widget.CustomerSpinner
         android:id="@+id/spinner"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:background="@drawable/bg_spinner" />
     
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        
+        
+        <CheckBox 
+     android:id="@+id/wh"
+     android:layout_width="wrap_content" 
+     android:layout_height="wrap_content"
+     android:text="未婚"
+     ></CheckBox>
+        <CheckBox 
+     android:id="@+id/yh"
+     android:layout_width="wrap_content" 
+     android:layout_height="wrap_content"
+     android:text="已婚"
+     ></CheckBox>
+    </LinearLayout>
 </LinearLayout>
