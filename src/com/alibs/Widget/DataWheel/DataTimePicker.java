@@ -1,4 +1,4 @@
-package com.litz.Widget.DataWheel;
+package com.alibs.Widget.DataWheel;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -20,8 +20,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.litz.R;
-import com.litz.Interface.IWidget;
+import com.alibs.R;
+import com.alibs.Interface.IWidget;
 
 
 public class DataTimePicker extends LinearLayout implements IWidget {

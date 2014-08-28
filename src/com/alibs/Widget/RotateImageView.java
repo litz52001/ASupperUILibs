@@ -1,4 +1,4 @@
-package com.litz.Widget;
+package com.alibs.Widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.litz.R;
+import com.alibs.R;
 
 /**
  * 单张图片旋转

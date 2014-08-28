@@ -1,4 +1,4 @@
-package com.litz.Widget;
+package com.alibs.Widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

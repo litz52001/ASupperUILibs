@@ -1,4 +1,4 @@
-package com.litz.Interface;
+package com.alibs.Interface;
 
 import android.app.Activity;
 import android.widget.BaseAdapter;

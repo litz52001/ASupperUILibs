@@ -1,4 +1,4 @@
-package com.litz.Activity;
+package com.alibs.Activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,14 +11,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Toast;
 
-import com.litz.R;
-import com.litz.Tools.AssetUtil;
-import com.litz.Widget.CustomerSpinner;
-import com.litz.Widget.RotateImageView;
-import com.litz.Widget.SelectPopupWindow;
-import com.litz.Widget.DataWheel.DataTimePicker;
+import com.ant.liao.GifView;
+import com.alibs.R;
+import com.alibs.Widget.CustomerSpinner;
+import com.alibs.Widget.RotateImageView;
+import com.alibs.Widget.SelectPopupWindow;
+import com.alibs.Widget.DataWheel.DataTimePicker;
 
 public class MainActivity extends Activity {
 
@@ -41,6 +44,8 @@ public class MainActivity extends Activity {
 		initLocation();
 		findViewById();
 		setClick();
+		
+		
 	}
 	
 	public void findViewById()
@@ -97,6 +102,39 @@ public class MainActivity extends Activity {
 				
 			}
 		});
+		
+		
+		final CheckBox wh = (CheckBox)this.findViewById(R.id.wh);
+		final CheckBox yh = (CheckBox)this.findViewById(R.id.yh);
+		wh.setChecked(false);
+		wh.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				System.out.println(wh.isChecked());
+				if (wh.isChecked()) {
+					yh.setClickable(false);
+				}else{
+					yh.setClickable(true);
+				}
+				
+			}
+		});
+		
+  
+		yh.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(yh.isChecked()){
+					yh.setChecked(false);
+					wh.setChecked(true);
+				}else{
+					yh.setChecked(true);
+					wh.setChecked(false);
+				}
+			}
+		}); 
 		
 	}
 	

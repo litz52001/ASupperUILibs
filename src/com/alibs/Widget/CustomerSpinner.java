@@ -1,4 +1,4 @@
-package com.litz.Widget;
+package com.alibs.Widget;
 
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.litz.R;
+import com.alibs.R;
 
 public class CustomerSpinner extends Spinner {
 

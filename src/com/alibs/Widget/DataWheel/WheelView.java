@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-package com.litz.Widget.DataWheel;
+package com.alibs.Widget.DataWheel;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -41,7 +41,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.litz.R;
+import com.alibs.R;
 
 /**
  * Numeric wheel view.
