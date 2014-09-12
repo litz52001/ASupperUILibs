@@ -36,7 +36,6 @@ public class MainActivity extends Activity {
 	
 	public static List<Map<String, String>> listMap;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,7 +43,6 @@ public class MainActivity extends Activity {
 		initLocation();
 		findViewById();
 		setClick();
-		
 		
 	}
 	
@@ -63,7 +61,7 @@ public class MainActivity extends Activity {
 	{
 		dataWheel.setOwner(this);
 		dataWheel.initialize();
-		dataWheel.isShowTime(true);
+//		dataWheel.isShowTime(true);
 		
 		rotateImg.setOnClickListener(new OnClickListener() {
 			@Override
