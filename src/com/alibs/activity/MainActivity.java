@@ -1,4 +1,4 @@
-package com.alibs.Activity;
+package com.alibs.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Toast;
 
-import com.ant.liao.GifView;
 import com.alibs.R;
 import com.alibs.Widget.CustomerSpinner;
 import com.alibs.Widget.RotateImageView;
@@ -28,7 +27,7 @@ public class MainActivity extends Activity {
 	
 	private RotateImageView rotateImg;
 	
-	private DataTimePicker dataWheel;
+//	private DataTimePicker dataWheel;
 	private Button selectPOP;
 	
 	SelectPopupWindow sweepWindow;
@@ -49,7 +48,7 @@ public class MainActivity extends Activity {
 	public void findViewById()
 	{
 		rotateImg = (RotateImageView)findViewById(R.id.update_progress);
-		dataWheel = (DataTimePicker)findViewById(R.id.dataWheel);
+//		dataWheel = (DataTimePicker)findViewById(R.id.dataWheel);
 		selectPOP = (Button)findViewById(R.id.selectPOP);
 		
 		spinner = (CustomerSpinner)findViewById(R.id.spinner);
@@ -59,8 +58,8 @@ public class MainActivity extends Activity {
 	
 	public void setClick()
 	{
-		dataWheel.setOwner(this);
-		dataWheel.initialize();
+//		dataWheel.setOwner(this);
+//		dataWheel.initialize();
 //		dataWheel.isShowTime(true);
 		
 		rotateImg.setOnClickListener(new OnClickListener() {

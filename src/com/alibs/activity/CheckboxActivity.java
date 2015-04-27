@@ -1,4 +1,4 @@
-package com.alibs.Activity;
+package com.alibs.activity;
 
 import java.util.ArrayList;
 
